@@ -222,119 +222,7 @@ $(function() {
     })
    });
 
-
-
-   function scroll_control(event) {
-    event.preventDefault();
-}
-function no_scroll(){
-    document.addEventListener("mousewheel", scroll_control, {passive: false});
-    document.addEventListener("touchmove", scroll_control, {passive: false});
-}
-function return_scroll(){
-    document.removeEventListener("mousewheel", scroll_control, {passive: false});
-    document.removeEventListener('touchmove', scroll_control, {passive: false});
-}
-
-$(function() {
- 
-    // スクロールしたら発動
-    $(window).scroll(function() {
-   
-      // スクロール量を変数に格納
-      var sc = $(this).scrollTop();
-   
-      if(sc>40000){
-          no_scroll()
-      }
-      else if(sc==0){
-        return_scroll()
-      }
-   
-    });
-  });
-
-  $(document).ready(function() {
-    var pagetop = $('.pagetop');
-      $(window).scroll(function () {
-         if ($(this).scrollTop() > 100) {
-              pagetop.fadeIn();
-         } else {
-              pagetop.fadeOut();
-              }
-         });
-         pagetop.click(function () {
-             $('body, html').animate({ scrollTop: 0 }, 500);
-                return false;
-     });
-  });
-
-//   window.onload = function(){
-//     document.getElementById("btn1").addEventListener("click", function(){
-//       scroll()
-//     });
-//   }
-
-// 設定開始（スクロールの動きを設定してください）
-// var speed = 50; // スクロールのスピード（1に近いほど速く）
-// var move = 5; // スクロールのなめらかさ（1に近いほどなめらかに）
-// var onoff = 0 ;
-// // 設定終了
-// // 初期化
-// var x = 0;
-// var y = 0;
-// var nx = 0;
-// var ny = 0;
-// function scroll(){
-//     var sc = $(this).scrollTop() ;
-//     if(onoff==1){
-//         if(3550<sc){
-//             speed = 15 ;
-//         }
-//         console.log("speedは"+speed) ;
-//         window.scrollBy(0, move); // スクロール処理
-
-// 	    var rep = setTimeout("scroll()", speed);
-
-//         // スクロール位置をチェック（IE用）
-//         if(document.all){
-
-//             x = document.body.scrollLeft;
-//             y = document.body.scrollTop;
-
-//         }
-//         // スクロール位置をチェック（NN用）
-//         else if(document.layers || document.getElementById){
-
-//             x = pageXOffset;
-//             y = pageYOffset;
-
-//         }
-
-//         if(nx == x && ny == y){ // スクロールし終わっていたら処理を終了
-
-//             clearTimeout(rep);
-
-//         }
-//         else{
-
-//             nx = x;
-//             ny = y;
-
-//         }
-//     }
-
-// }
-// function scrollstop(){
-//     onoff = 0 ;
-// }
-
-
-// //音声の再生
-// document.getElementById('audio').play();
-
-// //音声の一時停止
-// document.getElementById('audio').pause();
+   var onoff = 0 ;
 
 $(function () {
     var audioBtn = $('.audio_button'),
@@ -345,6 +233,7 @@ $(function () {
       if( audioWrap.hasClass('play') ) {
         audio.pause();
         audioWrap.removeClass('play');
+        onoff = 0 ;
       } else {
         audio.play();
         audioWrap.addClass('play');
@@ -353,21 +242,58 @@ $(function () {
     });
   });
 
+$(function() {
+    $('html,body').animate({ scrollTop: 0 }, '1');
+});
 
   $(function(){
         $('.audio_button').click(function(){
 
-            var speed = 35000;
-            var href= $(this).attr("href");
-            var target = $('.lyric1');
-            var position = 3550;
-            $("html, body").animate({scrollTop:position}, speed, "swing");
+            console.log("onoffは"+onoff);
+            if(onoff==0){
+                sc = 0 ;
+                window.location.reload();
+            }
+            else if(onoff==1){
+                var speed = 35000;
+                var position = 3550;
+                $("html, body").animate({scrollTop:position}, speed, "swing");
 
-            speed = 6000 ; position = 5350 ;
-            $("html, body").animate({scrollTop:position}, speed, "swing");
+                speed = 7000 ; position = 6800 ;
+                $("html, body").animate({scrollTop:position}, speed, "swing");
 
-            speed = 7000 ; position = 8700 ;
-            $("html, body").animate({scrollTop:position}, speed, "swing");
+                speed = 5000 ; position = 9550 ;
+                $("html, body").animate({scrollTop:position}, speed, "swing");
+
+                speed = 2500 ; position = 11500 ;
+                $("html, body").animate({scrollTop:position}, speed, "swing");
+
+                speed = 5000 ; position = 14450 ;
+                $("html, body").animate({scrollTop:position}, speed, "swing");
+
+                speed = 2000 ; position = 16000 ;
+                $("html, body").animate({scrollTop:position}, speed, "swing");
+
+                speed = 3000 ; position = 18800 ;
+                $("html, body").animate({scrollTop:position}, speed, "swing");
+
+                speed = 6000 ; position = 21700 ;
+                $("html, body").animate({scrollTop:position}, speed, "swing");
+
+                speed = 6000 ; position = 24500 ;
+                $("html, body").animate({scrollTop:position}, speed, "swing");
+
+                speed = 6000 ; position = 28000 ;
+                $("html, body").animate({scrollTop:position}, speed, "swing");
+
+                speed = 6000 ; position = 31000 ;
+                $("html, body").animate({scrollTop:position}, speed, "swing");
+
+                speed = 17000 ; position = 39000 ;
+                $("html, body").animate({scrollTop:position}, speed, "swing");
+
+                onoff = 0 ;
+            }
             return false;
         });
     });
