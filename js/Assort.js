@@ -25,28 +25,32 @@ $(function() {
 
     if(opa_top>=0){
         $('.bg_top').css({'opacity': opa_top}) ;
-        console.log("opa_top"+opa_top) ;  
+        //console.log("opa_top"+opa_top) ;  
     }    
 
     if(opa_middle>=0){
         $('.bg_middle').css({'opacity': opa_middle}) ;
-        console.log("opa_middle"+opa_middle) ;  
+        //console.log("opa_middle"+opa_middle) ;  
     }
 
     if(opa_gear>=0){
         $('.gear').css({'opacity': opa_gear}) ;
 
         $('.gear13').css({'opacity': opa_gear}) ;
-        console.log("opa_gear13は"+opa_gear) ; 
+        //console.log("opa_gear13は"+opa_gear) ; 
 
         $('.gear21').css({'opacity': opa_gear}) ;
-        console.log("opa_gear21は"+opa_gear) ; 
+        //console.log("opa_gear21は"+opa_gear) ; 
     }
 
     if(opa_bottom>=0){
         $('.bg_bottom').css({'opacity': opa_bottom}) ;
-        console.log("opa_bottomは"+opa_bottom) ; 
+        //console.log("opa_bottomは"+opa_bottom) ; 
     }
+    if(5350<=sc){
+        $('.con1').css({'opacity': 1 - ((sc-5350)/430)}) ;
+    }
+
   });
 });
 
@@ -67,7 +71,6 @@ $(window).on('scroll', function(){
     var sc = $(window).scrollTop() ;
     //scが1500から減少して2500で完全透明
     if(1500<=sc && sc<=2500){
-        console.log("?") ;
         var opacity = 1 - ((sc - 1500) / 1000) ;
         $('.opening').css({'opacity': opacity}) ;
     }
@@ -115,7 +118,7 @@ $(function(){
 
     var scene5 = new ScrollScene({
         duration: 1000,  // スタートから まで
-        offset: 12400     // スタートは
+        offset: 12600     // スタートは
     })
     .setPin(".con4") // どの要素を止めるか
     .addTo(controller); // コントローラーに渡す
@@ -143,7 +146,7 @@ $(function(){
 
     var scene9 = new ScrollScene({
         duration: 1250,  // スタートから まで
-        offset: 23050     // スタートは
+        offset: 23200     // スタートは
     })
     .setPin(".con8") // どの要素を止めるか
     .addTo(controller); // コントローラーに渡す
@@ -265,30 +268,107 @@ $(function() {
                 return false;
      });
   });
+
+//   window.onload = function(){
+//     document.getElementById("btn1").addEventListener("click", function(){
+//       scroll()
+//     });
+//   }
+
+// 設定開始（スクロールの動きを設定してください）
+// var speed = 50; // スクロールのスピード（1に近いほど速く）
+// var move = 5; // スクロールのなめらかさ（1に近いほどなめらかに）
+// var onoff = 0 ;
+// // 設定終了
+// // 初期化
+// var x = 0;
+// var y = 0;
+// var nx = 0;
+// var ny = 0;
+// function scroll(){
+//     var sc = $(this).scrollTop() ;
+//     if(onoff==1){
+//         if(3550<sc){
+//             speed = 15 ;
+//         }
+//         console.log("speedは"+speed) ;
+//         window.scrollBy(0, move); // スクロール処理
+
+// 	    var rep = setTimeout("scroll()", speed);
+
+//         // スクロール位置をチェック（IE用）
+//         if(document.all){
+
+//             x = document.body.scrollLeft;
+//             y = document.body.scrollTop;
+
+//         }
+//         // スクロール位置をチェック（NN用）
+//         else if(document.layers || document.getElementById){
+
+//             x = pageXOffset;
+//             y = pageYOffset;
+
+//         }
+
+//         if(nx == x && ny == y){ // スクロールし終わっていたら処理を終了
+
+//             clearTimeout(rep);
+
+//         }
+//         else{
+
+//             nx = x;
+//             ny = y;
+
+//         }
+//     }
+
+// }
+// function scrollstop(){
+//     onoff = 0 ;
+// }
+
+
+// //音声の再生
+// document.getElementById('audio').play();
+
+// //音声の一時停止
+// document.getElementById('audio').pause();
+
+$(function () {
+    var audioBtn = $('.audio_button'),
+    audioWrap = $('.audio_wrap'),
+    audio = document.getElementById('audio');
   
-// $(function(){
-//     var controller = new ScrollMagic();
+    audioBtn.on('click', function () {
+      if( audioWrap.hasClass('play') ) {
+        audio.pause();
+        audioWrap.removeClass('play');
+      } else {
+        audio.play();
+        audioWrap.addClass('play');
+        onoff = 1 ;
+      }
+    });
+  });
 
-//     // 動かしたい要素のアニメーションを作る
-//     //var tween = TweenMax.fromTo("#basicMove1", 0.5, {opacity:0 , y:50} , {opacity: 1, y:0});
 
-//     // トリガーになる位置を指定してアニメーションを設定する
-//     //var scene = new ScrollScene({triggerElement: "#basicMove1"})
-//     //        .setTween(tween)
-//     //       .addTo(controller);
+  $(function(){
+        $('.audio_button').click(function(){
 
-//     var scene1 = new ScrollScene({triggerElement: ".content1", duration: 2500 , triggerHook : "onLeave"})
-//             .setPin(".content1")
-//             .addTo(controller);
+            var speed = 35000;
+            var href= $(this).attr("href");
+            var target = $('.lyric1');
+            var position = 3550;
+            $("html, body").animate({scrollTop:position}, speed, "swing");
 
-//     var $basicMove = $(".scrolling_in1");
-//     var scene2= new ScrollScene({triggerElement: ".content1", duration: 1250 , triggerHook : "onCenter"})
-//             .on("progress", function (prog) {
-//                 var p = prog.progress;
-//                 $basicMove.css({
-//                     opacity: 1 * p ,
-//                     top : 1000 - (1000 * p)
-//                 });
-//             })
-//             .addTo(controller);
-// })
+            speed = 6000 ; position = 5350 ;
+            $("html, body").animate({scrollTop:position}, speed, "swing");
+
+            speed = 7000 ; position = 8700 ;
+            $("html, body").animate({scrollTop:position}, speed, "swing");
+            return false;
+        });
+    });
+    
